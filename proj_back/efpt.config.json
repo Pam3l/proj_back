@@ -16,6 +16,10 @@
       {
          "Name": "[dbo].[charity_events_table]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[stories]",
+         "ObjectType": 0
       }
    ],
    "UiHint": "PAMELALOTRIET\\SQLEXPRESS.gradprojdata",
@@ -24,6 +28,7 @@
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
+   "UseHierarchyId": false,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,

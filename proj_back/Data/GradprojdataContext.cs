@@ -20,6 +20,7 @@ namespace proj_back.Data
         }
 
         public virtual DbSet<CharityEventsTable> CharityEventsTables { get; set; }
+        public virtual DbSet<Story> Stories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,13 +33,24 @@ namespace proj_back.Data
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
                 entity.Property(e => e.EventDate)
-                    .HasColumnType("datetime")
+                    .IsRequired()
+                    .HasMaxLength(50)
                     .HasColumnName("event_date");
 
                 entity.Property(e => e.EventDescription)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(500)
                     .HasColumnName("event_description");
+
+                entity.Property(e => e.EventEndTime)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .HasColumnName("event-end_time")
+                    .IsFixedLength();
+
+                entity.Property(e => e.EventFee)
+                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnName("event_fee");
 
                 entity.Property(e => e.EventLocation)
                     .IsRequired()
@@ -50,11 +62,37 @@ namespace proj_back.Data
                     .HasMaxLength(50)
                     .HasColumnName("event_name");
 
-                entity.Property(e => e.EventTime)
+                entity.Property(e => e.EventStartTime)
                     .IsRequired()
                     .HasMaxLength(5)
-                    .HasColumnName("event_time")
+                    .HasColumnName("event_start_time")
                     .IsFixedLength();
+            });
+
+            modelBuilder.Entity<Story>(entity =>
+            {
+                entity.ToTable("stories");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.story)
+                    .IsRequired()
+                    .HasColumnName("story");
+
+                entity.Property(e => e.Surname)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("surname");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("title");
             });
 
             OnModelCreatingPartial(modelBuilder);
